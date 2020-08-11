@@ -1,10 +1,11 @@
 .SideBar
   .SideHeader
     .SideHeader__contents
-      .SideHeader__contents__name test
+      .SideHeader__contents__name 
+        = current_user.name
       %ul.SideHeader__contents__icons
         %li.SideHeader__contents__icon
-          = link_to '#' do
+          = link_to edit_user_path(current_user) do
             = icon('far', 'edit', class: "SideHeader__contents__icon--new")
         %li.SideHeader__contents__icon
           = link_to '#' do
