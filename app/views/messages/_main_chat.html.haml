@@ -1,24 +1,23 @@
 .MainChat
   .MainHeader
     .MainHeader__right
-      .MainHeader__right__name test
+      .MainHeader__right__name
+        = @group.name
       %ul.MainHeader__right__members
         Member :    
-        %li.MainHeader__right__member masa 
-    = link_to '#', class: "MainHeader__edit" do
+        %li.MainHeader__right__member
+          - @group.users.each do |user|
+            = user.name 
+    = link_to edit_group_path(@group), class: "MainHeader__edit" do
       Edit
   .Messages
-    .Message
-      .Message__info
-        .Message__info__name 
-        .Message__info__date 
-      .Message__content 
-        %p.Message__content
+    = render @messages
+  
   .Form
-    %form.FormContents 
+    = form_with model: [@group, @message], html: {class: "FormContents"}, local: true do |f|
       .FormField
-        %input{type: "text", class: 'FormField__content', placeholder: "type a message"}
-        %label{class: "FormField__image"}
-          = icon('fas', 'image')
-          %input{type: 'file', class: "FormField__image--file"}
-      %input{type: "submit", class: "Send-btn"}
+        = f.text_field :content, class: 'FormField__content', placeholder: 'type a message'
+        = f.label :image, class: 'FormField__image' do
+          = icon('far', 'image')
+          = f.file_field :image, class: 'FormField__image--file'
+      = f.submit 'Send', class: 'Send-btn'
