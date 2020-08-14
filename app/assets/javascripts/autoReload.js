@@ -2,7 +2,7 @@ $(function(){
   function buildHTML(message){
     if ( message.image ) {
       let html = 
-      `<div class=Message" data-message-id=${message.id}>
+    ` <div class="Message" data-message-id=${message.id}>
         <div class="Message__info">
           <div class="Message__info__name">
             ${message.user_name}
@@ -42,7 +42,6 @@ $(function(){
   
   let reloadMessages = function() {
     let last_message_id = $('.Message:last').data("message-id") || 0;
-    console.log(last_message_id)
     $.ajax({
       url: "api/messages",
       type: 'get',
